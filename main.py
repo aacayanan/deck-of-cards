@@ -37,6 +37,9 @@ def convert():
     # Update the result text
     result_text.set(f"{new_amount:,.2f} {foreign}")
 
+def func(event):
+    convert()
+
 
 # Create a window
 root = tk.Tk()
@@ -71,6 +74,7 @@ currency_frame.pack()
 empty_label = tk.Label(root, text="", font=("Arial", 16))
 amount_label = tk.Label(root, text="Enter Amount", font=("Arial", 16))
 amount_entry = Entry(root, justify='center', font=("Arial", 12))
+amount_entry.insert(0, "0")
 empty_label.pack(pady=1)
 amount_label.pack(pady=10)
 amount_entry.pack()
@@ -79,6 +83,7 @@ amount_entry.pack()
 result_text = StringVar()
 submit_button = Button(root, text="Submit", command=convert, font=("Arial", 12))
 submit_button.pack(pady=10)
+root.bind("<Return>", func)
 
 # Conversion Result
 empty_label = tk.Label(root, text="", font=("Arial", 16))
@@ -91,6 +96,11 @@ result_label.pack(pady=10)
 conversion_result_label.pack()
 
 result_frame.pack()
+
+# Footer
+footer_label = tk.Label(root, text="Created by: Aaron Cayanan (exchange rates updated 8/11/2024)", font=("Arial",
+                                                                                                         8))
+footer_label.pack(pady=20)
 
 # Start the event loop
 root.mainloop()
