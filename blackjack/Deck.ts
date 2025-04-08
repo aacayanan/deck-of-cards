@@ -1,4 +1,4 @@
-class Deck {
+export class Deck {
     // define the attributes
     cards: string[] = [];
 
