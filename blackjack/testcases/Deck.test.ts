@@ -1,4 +1,4 @@
-import { Deck } from '../Deck';
+import {Deck} from '../Deck';
 
 // Test with one deck
 describe('Deck', () => {
@@ -45,3 +45,19 @@ describe('Deck with two decks', () => {
         expect(deck.cards).toEqual(expectedCards);
     });
 });
+
+// Test shuffleDeck method
+describe('Deck shuffleDeck', () => {
+    test('should not have the same order after shuffling', () => {
+        const deckCount = 1;
+        const deck = new Deck(deckCount);
+        const originalOrder = [
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+        ];
+        deck.shuffleDeck();
+        expect(deck.cards).not.toEqual(originalOrder);
+    })
+})
