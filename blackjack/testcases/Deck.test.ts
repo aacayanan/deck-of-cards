@@ -59,5 +59,13 @@ describe('Deck shuffleDeck', () => {
         ];
         deck.shuffleDeck();
         expect(deck.cards).not.toEqual(originalOrder);
-    })
-})
+    });
+
+   test('should still equal the same number of cards after shuffling', () => {
+       const deckCount = 1;
+         const deck = new Deck(deckCount);
+         const originalCount = deck.cards.length;
+         deck.shuffleDeck();
+         expect(deck.cards.length).toBe(originalCount);
+   });
+});
