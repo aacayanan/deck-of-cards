@@ -18,4 +18,18 @@ export class Deck {
         }
         this.cards = deck;
     }
+
+    shuffleDeck() {
+        // shuffle the deck of cards
+        for (let i = 0; i < this.cards.length; i++) {
+            for (let j = 0; j < 10; j++){
+                // each iteration is shuffled 10 times
+                const randomIndex = Math.floor(Math.random() * this.cards.length);
+                const temp = this.cards[randomIndex];
+                // swap the cards
+                this.cards[randomIndex] = this.cards[i];
+                this.cards[i] = temp;
+            }
+        }
+    }
 }

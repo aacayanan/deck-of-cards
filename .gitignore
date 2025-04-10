@@ -1,2 +1,6 @@
 /blackjack/node_modules
 .idea/
+*.js
+*.js.map
+/dist
+/build
