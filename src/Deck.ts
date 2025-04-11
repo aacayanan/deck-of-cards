@@ -33,11 +33,25 @@ export class Deck {
         }
     }
 
-    drawCard(): string | null {
-        // draw a card from the deck
-        if (this.cards.length === 0) {
-            return null;
+    // define overload signatures
+    drawCard(): string[];
+    drawCard(multiplier: number): string[];
+
+    drawCard(multiplier?: number): string[]{
+        const drawnCards: string[] = [];
+        // check if multiplier is 0 or if deck is empty
+        if (this.cards.length === 0 || multiplier === 0) {
+            return [];
         }
-        return this.cards.pop() || null;
+        // draw a card from the deck based on multiplier
+        const drawCount = multiplier ?? 1;
+        for (let i = 0; i < drawCount; i++) {
+            if (this.cards.length > 0) {
+                drawnCards.push(<string>this.cards.pop());
+            } else {
+                break;
+            }
+        }
+        return drawnCards;
     }
 }

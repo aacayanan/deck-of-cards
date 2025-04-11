@@ -93,14 +93,15 @@ describe('Deck drawCard', () => {
         const expectedCard = 'A';
         const expectedCount = 51;
         const drawnCard = deck.drawCard();
-        expect(drawnCard).toBe(expectedCard);
+        expect(drawnCard[0]).toBe(expectedCard);
         expect(deck.cards.length).toBe(expectedCount);
     });
 
     test('should return empty array if there are no cards', () => {
-        const deck: never[] = [];
+        const deckCount = 0;
+        const deck = new Deck(deckCount);
         const drawnCard = deck.drawCard();
-        expect(drawnCard).toBe([]);
+        expect(drawnCard).toStrictEqual([]);
     });
 
     test('should draw multiple cards from the deck', () => {
@@ -120,18 +121,24 @@ describe('Deck drawCard', () => {
         const numberOfCardsToDraw = 0;
         const expectedCount = 52;
         const drawnCards = deck.drawCard(numberOfCardsToDraw);
-        expect(drawnCards).toBe([]);
+        expect(drawnCards).toStrictEqual([]);
         expect(deck.cards.length).toBe(expectedCount);
     });
 
     test('should return remaining cards if multiplier is greater than remaining cards', () => {
-        const deck = ['A', 'K', 'Q'];
-        const numberOfCardsToDraw = 5;
+        const deckCount = 1;
+        const deck = new Deck(deckCount);
+        const numberOfCardsToDraw = 60;
         const expectedDeckCount = 0;
-        const expectedCards = ['A', 'K', 'Q'];
+        const expectedCards = [
+            'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2',
+            'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2',
+            'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2',
+            'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'
+        ];
         const drawnCards = deck.drawCard(numberOfCardsToDraw);
         expect(drawnCards).toEqual(expectedCards);
         expect(deck.cards.length).toBe(expectedDeckCount);
-        expect(drawnCards.length).toBe(3);
+        expect(drawnCards.length).toBe(52);
     });
 });
