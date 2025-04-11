@@ -97,10 +97,32 @@ describe('Deck drawCard', () => {
         expect(deck.cards.length).toBe(expectedCount);
     });
 
-    test('should return null if there are no cards', () => {
-        const deckCount = 0;
-        const deck = new Deck(deckCount);
+    test('should return empty array if there are no cards', () => {
+        const deck: never[] = [];
         const drawnCard = deck.drawCard();
-        expect(drawnCard).toBeNull();
+        expect(drawnCard).toBe([]);
     });
+
+    test('should draw multiple cards from the deck', () => {
+        const deckCount = 1;
+        const deck = new Deck(deckCount);
+        const numberOfCardsToDraw = 2;
+        const expectedCount = 50;
+        const expectedCards = ['A', 'K'];
+        const drawnCards = deck.drawCard(numberOfCardsToDraw);
+        expect(drawnCards).toEqual(expectedCards);
+        expect(deck.cards.length).toBe(expectedCount);
+    });
+
+    test('should return empty array if multiplier is zero', () => {
+        const deckCount = 1;
+        const deck = new Deck(deckCount);
+        const numberOfCardsToDraw = 0;
+        const expectedCount = 52;
+        const drawnCards = deck.drawCard(numberOfCardsToDraw);
+        expect(drawnCards).toBe([]);
+        expect(deck.cards.length).toBe(expectedCount);
+    });
+
+
 });
