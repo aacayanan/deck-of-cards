@@ -101,6 +101,6 @@ describe('Deck drawCard', () => {
         const deckCount = 0;
         const deck = new Deck(deckCount);
         const drawnCard = deck.drawCard();
-        expect(drawnCard).toBeUndefined();
+        expect(drawnCard).toBeNull();
     });
 });
