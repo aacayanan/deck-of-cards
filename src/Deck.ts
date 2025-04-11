@@ -32,4 +32,12 @@ export class Deck {
             }
         }
     }
+
+    drawCard(): string | null {
+        // draw a card from the deck
+        if (this.cards.length === 0) {
+            return null;
+        }
+        return this.cards.pop() || null;
+    }
 }

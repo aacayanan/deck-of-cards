@@ -90,14 +90,14 @@ describe('Deck drawCard', () => {
     test('should draw a card from the deck', () => {
         const deckCount = 1;
         const deck = new Deck(deckCount);
-        const expectedCard = '2';
+        const expectedCard = 'A';
         const expectedCount = 51;
         const drawnCard = deck.drawCard();
         expect(drawnCard).toBe(expectedCard);
         expect(deck.cards.length).toBe(expectedCount);
     });
 
-    test('should return undefined if there are no cards', () => {
+    test('should return null if there are no cards', () => {
         const deckCount = 0;
         const deck = new Deck(deckCount);
         const drawnCard = deck.drawCard();
