@@ -124,5 +124,14 @@ describe('Deck drawCard', () => {
         expect(deck.cards.length).toBe(expectedCount);
     });
 
-
+    test('should return remaining cards if multiplier is greater than remaining cards', () => {
+        const deck = ['A', 'K', 'Q'];
+        const numberOfCardsToDraw = 5;
+        const expectedDeckCount = 0;
+        const expectedCards = ['A', 'K', 'Q'];
+        const drawnCards = deck.drawCard(numberOfCardsToDraw);
+        expect(drawnCards).toEqual(expectedCards);
+        expect(deck.cards.length).toBe(expectedDeckCount);
+        expect(drawnCards.length).toBe(3);
+    });
 });
