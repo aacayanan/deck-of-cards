@@ -156,4 +156,40 @@ describe('Deck resetDeck', () => {
         ];
         expect(deck.cards).toEqual(expectedCards);
     });
-})
+
+    test('should be empty if the deck count is zero', () => {
+        const deckCount = 0;
+        const deck = new Deck(deckCount);
+        expect(deck.cards.length).toBe(0);
+        for (let i = 0; i < 50; i++) {
+            deck.drawCard();
+        }
+        expect(deck.cards.length).toBe(0);
+        deck.resetDeck();
+        expect(deck.cards.length).toBe(0);
+        expect(deck.cards).toStrictEqual([]);
+    });
+
+    test('should reset the deck to the original state with multiple decks', () => {
+        const deckCount = 2;
+        const deck = new Deck(deckCount);
+        expect(deck.cards.length).toBe(104);
+        for (let i = 0; i < 20; i++) {
+            deck.drawCard();
+        }
+        expect(deck.cards.length).toBe(84);
+        deck.resetDeck();
+        expect(deck.cards.length).toBe(104);
+        const expectedCards = [
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+        ];
+        expect(deck.cards).toEqual(expectedCards);
+    });
+});
