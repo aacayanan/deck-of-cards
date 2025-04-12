@@ -1,9 +1,12 @@
 export class Deck {
     // define the attributes
     cards: string[] = [];
+    shoeCount: number = 0;
+
 
     constructor(deckCount: number) {
         this.createDeck(deckCount);
+        this.shoeCount = deckCount;
     }
 
     private createDeck(deckCount: number) {
@@ -53,5 +56,10 @@ export class Deck {
             }
         }
         return drawnCards;
+    }
+
+    resetDeck() {
+        this.cards = [];
+        this.createDeck(this.shoeCount);
     }
 }
