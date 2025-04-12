@@ -5,19 +5,15 @@ describe('Deck', () => {
     test('should create a deck with the correct number of cards', () => {
         const deckCount = 1;
         const deck = new Deck(deckCount);
-        expect(deck.cards.length).toBe(52 * deckCount);
-    });
-
-    test('should create a deck with the correct cards', () => {
-        const deckCount = 1;
-        const deck = new Deck(deckCount);
         const expectedCards = [
             '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
             '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
             '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
             '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
         ];
+        expect(deck.cards.length).toBe(52 * deckCount);
         expect(deck.cards).toEqual(expectedCards);
+        expect(deck.shoeCount).toBe(1);
     });
 });
 
@@ -43,20 +39,17 @@ describe('Deck with two decks', () => {
             '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
         ];
         expect(deck.cards).toEqual(expectedCards);
+        expect(deck.shoeCount).toBe(2);
     });
 });
 
 // Test with zero decks
 describe('Deck with zero decks', () => {
-    test('should create an empty deck', () => {
-        const deckCount = 0;
-        const deck = new Deck(deckCount);
-        expect(deck.cards.length).toBe(0);
-    });
-
     test('should create an empty deck with no cards', () => {
         const deckCount = 0;
         const deck = new Deck(deckCount);
+        expect(deck.cards.length).toBe(0);
+        expect(deck.shoeCount).toBe(0);
         expect(deck.cards).toEqual([]);
     });
 });
@@ -142,3 +135,25 @@ describe('Deck drawCard', () => {
         expect(drawnCards.length).toBe(52);
     });
 });
+
+// Test resetDeck method
+describe('Deck resetDeck', () => {
+    test('should reset the deck to the original state', () => {
+        const deckCount = 1;
+        const deck = new Deck(deckCount);
+        expect(deck.cards.length).toBe(52);
+        for (let i = 0; i < 20; i++) {
+            deck.drawCard();
+        }
+        expect(deck.cards.length).toBe(32);
+        deck.resetDeck();
+        expect(deck.cards.length).toBe(52);
+        const expectedCards = [
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A',
+        ];
+        expect(deck.cards).toEqual(expectedCards);
+    });
+})
