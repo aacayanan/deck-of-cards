@@ -90,11 +90,10 @@ describe('Deck drawCard', () => {
         expect(deck.cards.length).toBe(expectedCount);
     });
 
-    test('should return empty array if there are no cards', () => {
+    test('should return error if there are no cards initialized', () => {
         const deckCount = 0;
         const deck = new Deck(deckCount);
-        const drawnCard = deck.drawCard();
-        expect(drawnCard).toStrictEqual([]);
+        expect(() => deck.drawCard()).toThrow("Can't draw from a deck with no decks.");
     });
 
     test('should draw multiple cards from the deck', () => {
@@ -135,9 +134,16 @@ describe('Deck drawCard', () => {
             'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2',
             'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'
         ];
-        const drawnCards = []
-        for (let i = 0; i < numberOfCardsToDraw; i++) {
-            drawnCards.push(deck.drawCard());
+        const drawnCards: string[] = []
+        try {
+            for (let i = 0; i < numberOfCardsToDraw; i++) {
+                drawnCards.push(deck.drawCard());
+                // if no errors are thrown, force fail
+            }
+            fail('Expected error to be thrown');
+        } catch (error: any) {
+            expect(error).toBeInstanceOf(Error);
+            expect(error.message).toBe('No cards left in the deck.');
         }
         expect(drawnCards).toEqual(expectedCards);
         expect(deck.cards.length).toBe(expectedDeckCount);
@@ -170,10 +176,8 @@ describe('Deck resetDeck', () => {
         const deckCount = 0;
         const deck = new Deck(deckCount);
         expect(deck.cards.length).toBe(0);
-        for (let i = 0; i < 50; i++) {
-            deck.drawCard();
-        }
-        expect(deck.cards.length).toBe(0);
+        deck.cards = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
+        expect(deck.cards.length).toBeGreaterThan(0);
         deck.resetDeck();
         expect(deck.cards.length).toBe(0);
         expect(deck.cards).toStrictEqual([]);
