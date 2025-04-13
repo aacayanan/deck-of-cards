@@ -37,25 +37,35 @@ export class Deck {
     }
 
     // define overload signatures
-    drawCard(): string[];
-    drawCard(multiplier: number): string[];
+    // drawCard(): string[];
+    // drawCard(multiplier: number): string[];
+    //
+    // drawCard(multiplier?: number): string[]{
+    //     const drawnCards: string[] = [];
+    //     // check if multiplier is 0 or if deck is empty
+    //     if (this.cards.length === 0 || multiplier === 0) {
+    //         return [];
+    //     }
+    //     // draw a card from the deck based on multiplier
+    //     const drawCount = multiplier ?? 1;
+    //     for (let i = 0; i < drawCount; i++) {
+    //         if (this.cards.length > 0) {
+    //             drawnCards.push(<string>this.cards.pop());
+    //         } else {
+    //             break;
+    //         }
+    //     }
+    //     return drawnCards;
+    // }
 
-    drawCard(multiplier?: number): string[]{
-        const drawnCards: string[] = [];
-        // check if multiplier is 0 or if deck is empty
-        if (this.cards.length === 0 || multiplier === 0) {
-            return [];
+    drawCard(): string{
+        if (this.shoeCount === 0) {
+            throw new Error("Can't draw from a deck with no decks.");
         }
-        // draw a card from the deck based on multiplier
-        const drawCount = multiplier ?? 1;
-        for (let i = 0; i < drawCount; i++) {
-            if (this.cards.length > 0) {
-                drawnCards.push(<string>this.cards.pop());
-            } else {
-                break;
-            }
+        if (this.cards.length === 0) {
+            throw new Error("No cards left in the deck.");
         }
-        return drawnCards;
+        return <string>this.cards.pop();
     }
 
     resetDeck() {

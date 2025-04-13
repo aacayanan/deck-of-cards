@@ -138,8 +138,8 @@ describe('Deck drawCard', () => {
         try {
             for (let i = 0; i < numberOfCardsToDraw; i++) {
                 drawnCards.push(deck.drawCard());
-                // if no errors are thrown, force fail
             }
+            // if no errors are thrown, force fail
             fail('Expected error to be thrown');
         } catch (error: any) {
             expect(error).toBeInstanceOf(Error);
