@@ -86,7 +86,7 @@ describe('Deck drawCard', () => {
         const expectedCard = 'A';
         const expectedCount = 51;
         const drawnCard = deck.drawCard();
-        expect(drawnCard[0]).toBe(expectedCard);
+        expect(drawnCard).toBe(expectedCard);
         expect(deck.cards.length).toBe(expectedCount);
     });
 
@@ -103,7 +103,10 @@ describe('Deck drawCard', () => {
         const numberOfCardsToDraw = 2;
         const expectedCount = 50;
         const expectedCards = ['A', 'K'];
-        const drawnCards = deck.drawCard(numberOfCardsToDraw);
+        const drawnCards = []
+        for (let i = 0; i < numberOfCardsToDraw; i++) {
+            drawnCards.push(deck.drawCard());
+        }
         expect(drawnCards).toEqual(expectedCards);
         expect(deck.cards.length).toBe(expectedCount);
     });
@@ -113,7 +116,10 @@ describe('Deck drawCard', () => {
         const deck = new Deck(deckCount);
         const numberOfCardsToDraw = 0;
         const expectedCount = 52;
-        const drawnCards = deck.drawCard(numberOfCardsToDraw);
+        const drawnCards = []
+        for (let i = 0; i < numberOfCardsToDraw; i++) {
+            drawnCards.push(deck.drawCard());
+        }
         expect(drawnCards).toStrictEqual([]);
         expect(deck.cards.length).toBe(expectedCount);
     });
@@ -129,7 +135,10 @@ describe('Deck drawCard', () => {
             'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2',
             'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'
         ];
-        const drawnCards = deck.drawCard(numberOfCardsToDraw);
+        const drawnCards = []
+        for (let i = 0; i < numberOfCardsToDraw; i++) {
+            drawnCards.push(deck.drawCard());
+        }
         expect(drawnCards).toEqual(expectedCards);
         expect(deck.cards.length).toBe(expectedDeckCount);
         expect(drawnCards.length).toBe(52);
