@@ -2,11 +2,17 @@ export class Deck {
     // define the attributes
     cards: string[] = [];
     shoeCount: number = 0;
+    resetCounter: number = 0;
 
 
-    constructor(deckCount: number) {
+    constructor(deckCount: number, resetCounter: number = 0) {
         this.createDeck(deckCount);
         this.shoeCount = deckCount;
+        if ((resetCounter < deckCount * 52) || deckCount === 0) {
+            this.resetCounter = resetCounter;
+        } else {
+            throw new Error("resetCounter must be less than the number of cards in the deck.");
+        }
     }
 
     private createDeck(deckCount: number) {
