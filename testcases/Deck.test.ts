@@ -206,3 +206,33 @@ describe('Deck resetDeck', () => {
         expect(deck.cards).toEqual(expectedCards);
     });
 });
+
+// Test auto reset and reshuffle deck when low on cards
+describe('Deck with a reset counter', () => {
+    test('should have a reset counter of 0 when initialized w/o argument', () => {
+        const deckCount = 1;
+        const deck = new Deck(deckCount);
+        expect(deck.resetCounter).toBe(0);
+    });
+
+    test('should have a reset counter of 10 when initialized', () => {
+        const deckCount = 1;
+        const resetCounter = 10;
+        const deck = new Deck(deckCount, resetCounter);
+        expect(deck.resetCounter).toBe(10);
+    });
+
+    test('should throw an error if the reset counter is more than the deck count', () => {
+        const deckCount = 1;
+        const resetCounter = 100;
+        expect(() => new Deck(deckCount, resetCounter)).toThrow("resetCounter must be less than the number of cards in the deck.");
+    });
+
+    test('should throw an error if the reset counter is exactly the deck count', () => {
+        const deckCount = 2;
+        const resetCounter = 104;
+        expect(() => new Deck(deckCount, resetCounter)).toThrow("resetCounter must be less than the number of cards in the deck.");
+    });
+
+
+});
