@@ -234,5 +234,19 @@ describe('Deck with a reset counter', () => {
         expect(() => new Deck(deckCount, resetCounter)).toThrow("resetCounter must be less than the number of cards in the deck.");
     });
 
-
+    test('should reset the deck when the number of cards is less than the reset counter', () => {
+        const deckCount = 1;
+        const resetCounter = 42;
+        const numberOfCardsToDraw = 10;
+        const deck = new Deck(deckCount, resetCounter);
+        expect(deck.cards.length).toBe(52);
+        for (let i = 0; i < numberOfCardsToDraw; i++) {
+            deck.drawCard();
+        }
+        expect(deck.cards.length).toBe(42);
+        deck.drawCard();
+        expect(deck.cards.length).toBe(41);
+        deck.drawCard();
+        expect(deck.cards.length).toBe(51);
+    });
 });
